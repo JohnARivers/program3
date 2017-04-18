@@ -15,7 +15,7 @@
 
   <groupId>org.jacoco</groupId>
   <artifactId>org.jacoco.examples.maven</artifactId>
-  <version>0.7.9</version>
+  <version>0.7.10-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>JaCoCo Maven plug-in example with Offline Instrumentation</name>
@@ -33,7 +33,7 @@
       <groupId>org.jacoco</groupId>
       <artifactId>org.jacoco.agent</artifactId>
       <classifier>runtime</classifier>
-      <version>0.7.9</version>
+      <version>0.7.10-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -48,7 +48,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.7.9</version>
+        <version>0.7.10-SNAPSHOT</version>
         <executions>
           <execution>
             <id>default-instrument</id>

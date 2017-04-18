@@ -18,6 +18,23 @@
 
 <h1>Change History</h1>
 
+<h2>Snapshot Build 0.7.10.201704040852 (2017/04/04)</h2>
+
+<h3>New Features</h3>
+<ul>
+  <li>Exclude from a report enum methods <code>valueOf</code> and <code>values</code>
+      that are created by compiler
+      (GitHub <a href="https://github.com/jacoco/jacoco/issues/491">#491</a>).</li>
+  <li>Exclude from a report a part of bytecode that compiler generates for a
+      synchronized statement
+      (GitHub <a href="https://github.com/jacoco/jacoco/issues/501">#501</a>).</li>
+  <li>Exclude from a report methods which are annotated with <code>@lombok.Generated</code>.
+      Initial analysis and contribution by Rüdiger zu Dohna.
+      (GitHub <a href="https://github.com/jacoco/jacoco/issues/513">#513</a>).</li>
+  <li>Maven aggregated reports will now also include modules of runtime dependencies
+      (GitHub <a href="https://github.com/jacoco/jacoco/issues/498">#498</a>).</li>
+</ul>
+
 <h2>Release 0.7.9 (2017/02/05)</h2>
 
 <h3>Fixed Bugs</h3>
@@ -844,7 +861,7 @@
 
 </div>
 <div class="footer">
-  <span class="right"><a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>
+  <span class="right"><a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.10.201704040852</span>
   <a href="license.html">Copyright</a> &copy; 2009, 2017 Mountainminds GmbH &amp; Co. KG and Contributors
 </div>
 

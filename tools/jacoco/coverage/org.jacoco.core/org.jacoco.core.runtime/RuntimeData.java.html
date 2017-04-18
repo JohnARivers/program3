@@ -88,7 +88,7 @@ public class RuntimeData {
 <span class="fc bfc" id="L88" title="All 2 branches covered.">			if (reset) {</span>
 <span class="fc" id="L89">				reset();</span>
 			}
-<span class="pc" id="L91">		}</span>
+<span class="fc" id="L91">		}</span>
 <span class="fc" id="L92">	}</span>
 
 	/**
@@ -98,7 +98,7 @@ public class RuntimeData {
 <span class="fc" id="L98">		synchronized (store) {</span>
 <span class="fc" id="L99">			store.reset();</span>
 <span class="fc" id="L100">			startTimeStamp = System.currentTimeMillis();</span>
-<span class="pc" id="L101">		}</span>
+<span class="fc" id="L101">		}</span>
 <span class="fc" id="L102">	}</span>
 
 	/**
@@ -118,7 +118,7 @@ public class RuntimeData {
 			final int probecount) {
 <span class="fc" id="L119">		synchronized (store) {</span>
 <span class="fc" id="L120">			return store.get(id, name, probecount);</span>
-<span class="nc" id="L121">		}</span>
+		}
 	}
 
 	/**
@@ -252,4 +252,4 @@ public class RuntimeData {
 <span class="fc" id="L252">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>Code Coverage Report for JaCoCo 0.7.9</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.10.201704040852</span>Code Coverage Report for JaCoCo 0.7.10-SNAPSHOT</div></body></html>

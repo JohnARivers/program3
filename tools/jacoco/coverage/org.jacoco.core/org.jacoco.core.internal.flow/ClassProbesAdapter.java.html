@@ -84,9 +84,9 @@ public class ClassProbesAdapter extends ClassVisitor implements
 							ClassProbesAdapter.this.name, access, name, desc,
 							probesAdapter);
 <span class="fc" id="L86">					probesAdapter.setAnalyzer(analyzer);</span>
-<span class="fc" id="L87">					this.accept(analyzer);</span>
+<span class="fc" id="L87">					methodProbes.accept(this, analyzer);</span>
 <span class="fc" id="L88">				} else {</span>
-<span class="fc" id="L89">					this.accept(probesAdapter);</span>
+<span class="fc" id="L89">					methodProbes.accept(this, probesAdapter);</span>
 				}
 <span class="fc" id="L91">			}</span>
 		};
@@ -105,4 +105,4 @@ public class ClassProbesAdapter extends ClassVisitor implements
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>Code Coverage Report for JaCoCo 0.7.9</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.10.201704040852</span>Code Coverage Report for JaCoCo 0.7.10-SNAPSHOT</div></body></html>

@@ -42,8 +42,8 @@ import org.jacoco.report.IReportGroupVisitor;
  * &lt;/p&gt;
  * 
  * &lt;ul&gt;
- * &lt;li&gt;&lt;code&gt;compile&lt;/code&gt;: Project source and execution data is included in
- * the report.&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;compile&lt;/code&gt;, &lt;code&gt;runtime&lt;/code&gt;: Project source and execution
+ * data is included in the report.&lt;/li&gt;
  * &lt;li&gt;&lt;code&gt;test&lt;/code&gt;: Only execution data is considered for the report.&lt;/li&gt;
  * &lt;/ul&gt;
  * 
@@ -105,85 +105,87 @@ import org.jacoco.report.IReportGroupVisitor;
 				dataFileExcludes);
 <span class="fc" id="L106">		loadExecutionData(support, filter, getProject().getBasedir());</span>
 <span class="fc bfc" id="L107" title="All 2 branches covered.">		for (final MavenProject dependency : findDependencies(</span>
-				Artifact.SCOPE_COMPILE, Artifact.SCOPE_TEST)) {
-<span class="fc" id="L109">			loadExecutionData(support, filter, dependency.getBasedir());</span>
+				Artifact.SCOPE_COMPILE, Artifact.SCOPE_RUNTIME,
+				Artifact.SCOPE_TEST)) {
+<span class="fc" id="L110">			loadExecutionData(support, filter, dependency.getBasedir());</span>
 		}
-<span class="fc" id="L111">	}</span>
+<span class="fc" id="L112">	}</span>
 
 	private void loadExecutionData(final ReportSupport support,
 			final FileFilter filter, final File basedir) throws IOException {
-<span class="fc bfc" id="L115" title="All 2 branches covered.">		for (final File execFile : filter.getFiles(basedir)) {</span>
-<span class="fc" id="L116">			support.loadExecutionData(execFile);</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">		for (final File execFile : filter.getFiles(basedir)) {</span>
+<span class="fc" id="L117">			support.loadExecutionData(execFile);</span>
 		}
-<span class="fc" id="L118">	}</span>
+<span class="fc" id="L119">	}</span>
 
 	@Override
 	void addFormatters(final ReportSupport support, final Locale locale)
 			throws IOException {
-<span class="fc" id="L123">		support.addAllFormatters(outputDirectory, outputEncoding, footer,</span>
+<span class="fc" id="L124">		support.addAllFormatters(outputDirectory, outputEncoding, footer,</span>
 				locale);
-<span class="fc" id="L125">	}</span>
+<span class="fc" id="L126">	}</span>
 
 	@Override
 	void createReport(final IReportGroupVisitor visitor,
 			final ReportSupport support) throws IOException {
-<span class="fc" id="L130">		final IReportGroupVisitor group = visitor.visitGroup(title);</span>
-<span class="fc bfc" id="L131" title="All 2 branches covered.">		for (final MavenProject dependency : findDependencies(Artifact.SCOPE_COMPILE)) {</span>
-<span class="fc" id="L132">			support.processProject(group, dependency.getArtifactId(),</span>
+<span class="fc" id="L131">		final IReportGroupVisitor group = visitor.visitGroup(title);</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">		for (final MavenProject dependency : findDependencies(</span>
+				Artifact.SCOPE_COMPILE, Artifact.SCOPE_RUNTIME)) {
+<span class="fc" id="L134">			support.processProject(group, dependency.getArtifactId(),</span>
 					dependency, getIncludes(), getExcludes(), sourceEncoding);
 		}
-<span class="fc" id="L135">	}</span>
+<span class="fc" id="L137">	}</span>
 
 	@Override
 	protected String getOutputDirectory() {
-<span class="nc" id="L139">		return outputDirectory.getAbsolutePath();</span>
+<span class="nc" id="L141">		return outputDirectory.getAbsolutePath();</span>
 	}
 
 	@Override
 	public void setReportOutputDirectory(final File reportOutputDirectory) {
-<span class="pc bpc" id="L144" title="2 of 4 branches missed.">		if (reportOutputDirectory != null</span>
+<span class="pc bpc" id="L146" title="2 of 4 branches missed.">		if (reportOutputDirectory != null</span>
 				&amp;&amp; !reportOutputDirectory.getAbsolutePath().endsWith(
 						&quot;jacoco-aggregate&quot;)) {
-<span class="fc" id="L147">			outputDirectory = new File(reportOutputDirectory,</span>
+<span class="fc" id="L149">			outputDirectory = new File(reportOutputDirectory,</span>
 					&quot;jacoco-aggregate&quot;);
 		} else {
-<span class="nc" id="L150">			outputDirectory = reportOutputDirectory;</span>
+<span class="nc" id="L152">			outputDirectory = reportOutputDirectory;</span>
 		}
-<span class="fc" id="L152">	}</span>
+<span class="fc" id="L154">	}</span>
 
 	public String getOutputName() {
-<span class="fc" id="L155">		return &quot;jacoco-aggregate/index&quot;;</span>
+<span class="fc" id="L157">		return &quot;jacoco-aggregate/index&quot;;</span>
 	}
 
 	public String getName(final Locale locale) {
-<span class="fc" id="L159">		return &quot;JaCoCo Aggregate&quot;;</span>
+<span class="fc" id="L161">		return &quot;JaCoCo Aggregate&quot;;</span>
 	}
 
 	private List&lt;MavenProject&gt; findDependencies(final String... scopes) {
-<span class="fc" id="L163">		final List&lt;MavenProject&gt; result = new ArrayList&lt;MavenProject&gt;();</span>
-<span class="fc" id="L164">		final List&lt;String&gt; scopeList = Arrays.asList(scopes);</span>
-<span class="fc bfc" id="L165" title="All 2 branches covered.">		for (final Object dependencyObject : getProject().getDependencies()) {</span>
-<span class="fc" id="L166">			final Dependency dependency = (Dependency) dependencyObject;</span>
-<span class="fc bfc" id="L167" title="All 2 branches covered.">			if (scopeList.contains(dependency.getScope())) {</span>
-<span class="fc" id="L168">				final MavenProject project = findProjectFromReactor(dependency);</span>
-<span class="fc bfc" id="L169" title="All 2 branches covered.">				if (project != null) {</span>
-<span class="fc" id="L170">					result.add(project);</span>
+<span class="fc" id="L165">		final List&lt;MavenProject&gt; result = new ArrayList&lt;MavenProject&gt;();</span>
+<span class="fc" id="L166">		final List&lt;String&gt; scopeList = Arrays.asList(scopes);</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">		for (final Object dependencyObject : getProject().getDependencies()) {</span>
+<span class="fc" id="L168">			final Dependency dependency = (Dependency) dependencyObject;</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">			if (scopeList.contains(dependency.getScope())) {</span>
+<span class="fc" id="L170">				final MavenProject project = findProjectFromReactor(dependency);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">				if (project != null) {</span>
+<span class="fc" id="L172">					result.add(project);</span>
 				}
 			}
-<span class="fc" id="L173">		}</span>
-<span class="fc" id="L174">		return result;</span>
+<span class="fc" id="L175">		}</span>
+<span class="fc" id="L176">		return result;</span>
 	}
 
 	private MavenProject findProjectFromReactor(final Dependency d) {
-<span class="fc bfc" id="L178" title="All 2 branches covered.">		for (final MavenProject p : reactorProjects) {</span>
-<span class="pc bpc" id="L179" title="1 of 6 branches missed.">			if (p.getGroupId().equals(d.getGroupId())</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">		for (final MavenProject p : reactorProjects) {</span>
+<span class="pc bpc" id="L181" title="1 of 6 branches missed.">			if (p.getGroupId().equals(d.getGroupId())</span>
 					&amp;&amp; p.getArtifactId().equals(d.getArtifactId())
 					&amp;&amp; p.getVersion().equals(d.getVersion())) {
-<span class="fc" id="L182">				return p;</span>
+<span class="fc" id="L184">				return p;</span>
 			}
 		}
-<span class="fc" id="L185">		return null;</span>
+<span class="fc" id="L187">		return null;</span>
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span>Code Coverage Report for JaCoCo 0.7.9</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.10.201704040852</span>Code Coverage Report for JaCoCo 0.7.10-SNAPSHOT</div></body></html>

@@ -1,0 +1,6 @@
+
+
+IglooScore2
+
+Line 47 : if ((score1 > score2 && score1 > score3) || (score1 == score 2 && score1 == score3)
+	  assigns value of 99 to s1 and s2
